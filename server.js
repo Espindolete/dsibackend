@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 
 app.post('/api/check-turno',async(req,res)=>{
+    console.log("se chequeo turno")
     const { fecha, hora} = req.body;
     try {
         // Verificar que la fecha no sea pasada
@@ -41,6 +42,7 @@ app.post('/api/check-turno',async(req,res)=>{
 });
 
 app.get('/api/get-revision',async(req,res)=>{
+    console.log("se realizo revision")
     try{ 
         const getRevision='SELECT precio,requisitos from revision where tipodevehiculo = $1 '
         const result=await client.query(getRevision,[req.query.tipoVehiculo]);
@@ -54,6 +56,7 @@ app.get('/api/get-revision',async(req,res)=>{
 
 
 app.post('/api/solicitar-turno', async (req, res) => {
+    console.log("se realizo solicitud")
     const { fecha, hora, tipoVehiculo, dni,nombre , patente, modelo, telefono } = req.body;
 
     try {   
