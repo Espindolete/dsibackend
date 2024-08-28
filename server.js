@@ -28,7 +28,7 @@ app.post('/api/check-turno',async(req,res)=>{
         // Verificar disponibilidad de fecha y hora
         const checkAvailabilityQuery = 'SELECT * FROM turnos WHERE fecha = $1 AND hora = $2';
         const { rows: availabilityRows } = await client.query(checkAvailabilityQuery, [fecha, hora]);
-
+        console.log("se hizo la query")
         if (availabilityRows.length > 0) {
             return res.status(400).json({ error: 'Fecha y hora no disponibles' });
         }
