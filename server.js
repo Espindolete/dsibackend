@@ -19,6 +19,8 @@ app.post('/api/check-turno',async(req,res)=>{
     console.log("se chequeo turno")
     const { fecha, hora} = req.body;
     try {
+        console.log("esta intentando turno")
+
         // Verificar que la fecha no sea pasada
         const today = new Date().toISOString().split('T')[0];
         if (new Date(fecha) < new Date(today)) {
@@ -27,6 +29,8 @@ app.post('/api/check-turno',async(req,res)=>{
 
         // Verificar disponibilidad de fecha y hora
         const checkAvailabilityQuery = 'SELECT * FROM turnos WHERE fecha = $1 AND hora = $2';
+        console.log("creo la query")
+
         const { rows: availabilityRows } = await client.query(checkAvailabilityQuery, [fecha, hora]);
         console.log("se hizo la query")
         if (availabilityRows.length > 0) {
@@ -99,7 +103,7 @@ app.post('/api/solicitar-turno', async (req, res) => {
 
 
 app.get('/api/testing',async(req,res)=>{
-
+    console.log("esta andando bien esto")
     res.status(200).json({message:"Hello World"})
 })
 
